@@ -1,0 +1,17 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nifi
+spec:
+  volumes:
+    - name: nifi-pv-storage
+      persistentVolumeClaim:
+        claimName: nifi-pv-claim
+  containers:
+    - name: nifi
+      image: apache/nifi
+      ports:
+        - containerPort: 8080
+      volumeMounts:
+        - mountPath: "/opt/nifi"
+          name: nifi-pv-storage

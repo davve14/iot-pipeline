@@ -1,0 +1,31 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: fast-data-dev-deployment
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: fast-data-dev
+  template:
+    metadata:
+      labels:
+        app: fast-data-dev
+    spec:
+      containers:
+        - name: fast-data-dev
+          image: landoop/fast-data-dev
+          env:
+            - name: ADV_HOST
+              value: fast-data-dev
+          ports:
+            - containerPort: 2181
+              name: zookeeper
+            - containerPort: 3030
+              name: port3030
+            - containerPort: 8081
+              name: port8081
+            - containerPort: 8082
+              name: port8082
+            - containerPort: 9092
+              name: kafka
