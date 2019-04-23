@@ -1,3 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nifi
+spec:
+  selector:
+    app: nifi
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      name: nifi-listen
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -17,3 +29,4 @@ spec:
           image: apache/nifi
           ports:
             - containerPort: 8080
+              name: nifi-listen
